@@ -1,0 +1,14 @@
+
+<nb-card>
+  <nb-card-header><h4>Add Dashboard</h4></nb-card-header>
+  <nb-card-body>
+    <input type="text" nbInput fullWidth fieldSize="small" placeholder="Dashboard name" [(ngModel)]='newDashboard.name'>
+    <br><br>
+    <textarea nbInput fullWidth placeholder="Dashboard Description" [(ngModel)]='newDashboard.description'></textarea>
+  </nb-card-body>
+  <nb-card-footer>
+      <button nbButton  status="primary" (click)="saveDashboard()">Save Dashboard 
+        <nb-icon icon="save-outline"></nb-icon>
+      </button>
+  </nb-card-footer>
+</nb-card>

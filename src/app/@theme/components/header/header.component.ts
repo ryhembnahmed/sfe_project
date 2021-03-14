@@ -30,9 +30,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
       value: 'cosmic',
       name: 'Cosmic',
     },
-    {
+    /*{
       value: 'corporate',
       name: 'Corporate',
+    },*/
+    {
+      value: 'aquamarine',
+      name: 'Aqua',
     },
   ];
 
@@ -53,7 +57,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.userService.getUsers()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
+      .subscribe((users: any) => this.user = users.ryhem);
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()

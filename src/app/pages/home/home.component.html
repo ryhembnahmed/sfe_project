@@ -1,3 +1,28 @@
-<p>
-  home works!
-</p>
+<div class="row mb-2" *ngIf="search_value != ''">
+  <div class="col-12 text-right">
+    <button nbButton outline  size="small" status="danger" (click)="resetFilter()">you searched for : {{ search_value }} 
+      <nb-icon icon="close-circle-outline"></nb-icon>
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 col-sm-6" *ngFor="let item of dashboards| filter:search_value">
+    <nb-card accent="danger">
+      <nb-card-header>
+        <div class="row">
+          <div class="col">{{item.name}}</div>
+          <div class="col text-right">
+            <button nbButton outline  size="small" status="danger" (click)="goToDashboard(item.id)">
+              Go to <nb-icon icon="paper-plane-outline"></nb-icon>
+            </button>
+          </div>
+        </div>
+      </nb-card-header>
+      <nb-card-body>
+        {{item.description}}
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+
+

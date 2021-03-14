@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class AccidentService {
 
-  private REST_API_SERVER = "http://localhost:3000";
+private REST_API_SERVER = "http://localhost:3000";
 
 constructor(private http : HttpClient) { }
 

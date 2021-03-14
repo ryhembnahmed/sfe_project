@@ -1,0 +1,22 @@
+<div class="row mb-2" *ngIf="search_value != ''">
+  <div class="col-12 text-right">
+    <button nbButton outline  size="small" status="danger" (click)="resetFilter()">you searched for : {{ search_value }} 
+      <nb-icon icon="close-circle-outline"></nb-icon>
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 col-sm-6 col-md-4" *ngFor="let item of news| filter:search_value">
+    <nb-card accent="info">
+      <nb-card-header>{{item.title}}</nb-card-header>
+      <nb-card-body>
+        {{item.body}}
+      </nb-card-body>
+      <nb-card-footer>
+        <a [href]="item.link" target="_blank">Link</a>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+</div>
+
+
