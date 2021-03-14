@@ -1,0 +1,19 @@
+<nb-card accent="info">
+  <nb-card-header>
+    <div class="row">
+      <div class="col">
+        {{ graph_title }}
+      </div>
+      <div class="col text-right">
+        <nb-button-group size="tiny">
+          <button nbButtonToggle pressed (click)="selectEchart()">Echart</button>
+          <button nbButtonToggle (click)="selectChartJS()">ChartJS</button>
+        </nb-button-group>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <ebar-chart *ngIf="plot_type == 1" [dataplot]="plot_data"></ebar-chart>
+    <bar-chart *ngIf="plot_type == 2" [dataplot]="plot_data"></bar-chart>
+  </nb-card-body>
+</nb-card>
