@@ -1,3 +1,4 @@
+import { AuthGuard } from './AuthGuard.service';
 /**
  * @license
  * Copyright Akveo. All Rights Reserved.
@@ -20,6 +21,8 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { NbPasswordAuthStrategy, NbAuthModule, NbAuthJWTToken } from '@nebular/auth';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +42,53 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+          token: {
+            class: NbAuthJWTToken,
+            key: 'token',
+          },
+          baseEndpoint: 'http://localhost:8080',
+          login: {
+            endpoint: '/authenticate',
+            redirect: {
+              success: '/pages/dashboards',
+              failure: null, // stay on the same page
+            },
+          },
+          register: {
+            endpoint: '/register',
+            redirect: {
+              success: '/auth/login/',
+              failure: null, // stay on the same page
+            },
+          },
+          logout: {redirect: { success: '/auth/login/', failure: '/auth/login/' } },
+        }),
+      ],
+      forms: {
+        login: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true,
+          },
+        },
+        register: {
+          redirectDelay: 0,
+          showMessages: {
+            success: true,
+          },
+        },
+        logout: {
+          redirectDelay: 0,
+        },
+      },
+    }),
+  ],
+  providers: [
+    AuthGuard
   ],
   bootstrap: [AppComponent],
 })

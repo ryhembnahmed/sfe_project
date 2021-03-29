@@ -1,3 +1,5 @@
+import { NbAuthJWTToken, NbAuthService } from '@nebular/auth';
+import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
 
@@ -42,22 +44,44 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   currentTheme = 'default';
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+  userMenu = [
+      { title: 'Profile', action: 'ProfileClicked()' },
+      { title: 'Log out', action: 'logout()' }
+  ]
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private themeService: NbThemeService,
               private userService: UserData,
               private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
+              private breakpointService: NbMediaBreakpointsService,
+              private _router: Router,
+              private authService: NbAuthService) {
   }
 
   ngOnInit() {
     this.currentTheme = this.themeService.currentTheme;
 
-    this.userService.getUsers()
+    /*this.userService.getUsers()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.ryhem);
+      .subscribe((users: any) => this.user = users.ryhem);*/
+
+    this.authService.onTokenChange().subscribe((token: NbAuthJWTToken) => {
+      if (token.isValid()) {
+        let tokenpayload = token.getPayload()
+        let username = tokenpayload['sub'].substring(0, tokenpayload['sub'].indexOf('@'));
+        let connected_user = {name : username}
+        this.user = connected_user;
+      }
+    });
+
+    this.menuService.onItemClick().subscribe((event) => {
+      if (event.item.title === 'Log out') {
+        this.user = null;
+        localStorage.removeItem('auth_app_token');
+        this._router.navigate(['/auth/login']);
+      }
+    });
 
     const { xl } = this.breakpointService.getBreakpointsMap();
     this.themeService.onMediaQueryChange()
@@ -95,4 +119,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.menuService.navigateHome();
     return false;
   }
+
+  logout() {console.log('logout') }
+
 }

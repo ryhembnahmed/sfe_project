@@ -12,8 +12,11 @@
         <div class="row">
           <div class="col">{{item.name}}</div>
           <div class="col text-right">
-            <button nbButton outline  size="small" status="danger" (click)="goToDashboard(item.id)">
+            <button nbButton outline  size="small" status="primary" (click)="goToDashboard(item.id)">
               Go to <nb-icon icon="paper-plane-outline"></nb-icon>
+            </button>
+            <button nbButton outline  class="ml-1" size="small" status="danger" (click)="deleteDashboard(item.id)">
+             <nb-icon icon="trash-2-outline"></nb-icon>
             </button>
           </div>
         </div>

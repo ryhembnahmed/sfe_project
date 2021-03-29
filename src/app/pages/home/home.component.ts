@@ -36,4 +36,10 @@ export class HomeComponent implements OnInit {
     this._router.navigate(['/pages/dashboard', dashboard_id]);
   }
 
+  deleteDashboard(dashboard_id){
+    this.dataService.deleteDashboard(dashboard_id).subscribe(data => {
+      this.dashboards = this.dashboards.filter( el => el['id'] !== dashboard_id  );
+    })
+  }
+
 }

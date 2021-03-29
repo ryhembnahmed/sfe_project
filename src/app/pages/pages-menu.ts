@@ -6,15 +6,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
     group: true,
   },
   {
-    title: 'News',
-    icon: 'grid-outline',
-    link: '/pages/news',
-    home: true,
-  },
-  {
     title: 'Dashboards',
     icon: 'home-outline',
     link: '/pages/dashboards',
+    home: true,
   },
   {
     title: 'Add Dashboard',
@@ -25,7 +20,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     title: 'Management',
     group: true,
   },*/
-  {
+  /*{
     title: 'Auth',
     icon: 'lock-outline',
     children: [
@@ -46,5 +41,5 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/auth/reset-password',
       },
     ],
-  },
+  },*/
 ];
